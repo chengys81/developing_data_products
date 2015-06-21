@@ -3,13 +3,14 @@ library(datasets)
 data(iris)
 
 # Define server logic required to plot various variables against
-# mpg
+# Species
 shinyServer(function(input, output) {
     
     # Compute the formula text in a reactive expression 
     formulaText <- reactive({
         paste(input$variable, "~ Species")
     })
+    
     
     # generate a caption
     output$caption <- renderText({
