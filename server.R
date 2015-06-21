@@ -11,10 +11,14 @@ shinyServer(function(input, output) {
         paste(input$variable, "~ Species")
     })
     
+    pval <- reactive({
+        a <- summary(aov(as.formula(paste(input$variable, "~ Species")), data=iris))
+        a[[1]][1,5]
+    })
     
     # generate a caption
     output$caption <- renderText({
-        paste("Species vs", input$variable)
+        paste("Species vs", input$variable, ", p-value =", pval())
     })
     
     # Generate a plot of the requested variable against Species and
